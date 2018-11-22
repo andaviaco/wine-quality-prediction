@@ -138,6 +138,7 @@
 </template>
 
 <script>
+import api from './api';
 
 export default {
   name: 'app',
@@ -160,6 +161,22 @@ export default {
       }
     }
   },
+  computed: {
+    descriptor() {
+      return Object.values(this.$data.form);
+    }
+  },
+  methods: {
+    async requestQuality(descriptor) {
+      const { predicted: quality } = await api.predict({ values: descriptor });
+
+      return quality;
+    },
+
+    async onSubmit() {
+      console.log('quality', await this.requestQuality(this.descriptor));
+    },
+  }
 }
 </script>
 
