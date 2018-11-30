@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    <header>
+      <div class="logo"></div>
+      <h1 class="main-title">Wine Quality</h1>
+    </header>
+
     <el-row :gutter="20">
       <el-col :span="12">
         <el-form ref="form" :model="form" label-width="200px" size="mini">
@@ -131,7 +136,15 @@
       </el-col>
 
       <el-col :span="12">
-        <div>world</div>
+        <div>
+          <div>
+            <span class='quality-value'>{{ this.quality }}</span>
+            <p>Quality</p>
+          </div>
+          <figure>
+            <img class="quality-icon" src="./assets/medal-star-2.svg" alt="">
+          </figure>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -146,6 +159,7 @@ export default {
   },
   data() {
     return {
+      quality: '-',
       form: {
         fixedAcidity: 8.0,
         volatileAcidity: 0.5,
@@ -174,19 +188,54 @@ export default {
     },
 
     async onSubmit() {
-      console.log('quality', await this.requestQuality(this.descriptor));
+      const quality = await this.requestQuality(this.descriptor);
+
+      this.quality = quality;
     },
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+$primay-color: #a31818;
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
+
+.logo {
+  background-color: $primay-color;
+  height: 50px;
+  mask: url(./assets/bunch-of-grapes.svg) no-repeat center;
+  mask-size: 50px;
+  width: 50px;
+}
+
+.main-title {
+  margin-top: 0;
+}
+
+.quality-value {
+  color: $primay-color;
+  font-family: Helvetica;
+  font-size: 200px;
+  font-weight: bold;
+  display: block;
+  line-height: 170px;
+}
+
+.quality-icon {
+  width: 60px;
+}
+
 </style>
