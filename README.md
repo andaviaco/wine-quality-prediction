@@ -1,4 +1,10 @@
-# wine-quality
+# Wine Quality Prediction
+Predict the sensorial quality of a wine base on its physicochemical qualities.
+
+See more about the project and how the quality is predicted at the [server repository](https://github.com/andaviaco/wine-quality-prediction-server).
+
+![App showing the ](screenshots/app.png)
+
 
 ## Project setup
 ```
